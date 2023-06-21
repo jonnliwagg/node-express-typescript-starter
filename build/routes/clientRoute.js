@@ -13,7 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const jwt_1 = require("../utils/jwt");
 const clientService_1 = __importDefault(require("../services/clientService"));
+const environment_1 = __importDefault(require("../environment"));
 const router = express_1.default.Router();
 router.post('/', (req, resp, next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers);
@@ -36,12 +38,14 @@ router.get('/', (req, resp, next) => __awaiter(void 0, void 0, void 0, function*
         if (typeof xClient === 'string' && typeof xSecret === 'string') {
             const existingClient = yield clientService_1.default.getInstance().verifyUser(xClient, xSecret);
             if (existingClient.length > 0) {
-                resp.status(200).json(existingClient);
+                const jwtSecret = environment_1.default.JWT_SECRET;
+                const jwtDurationInMinutes = parseInt(environment_1.default.JWT_DURATION_IN_MINUTES);
+                // const jwt = generateJWT(existingClient[0].id + '', jwtDurationInMinutes, jwtSecret);
+                const jwt = (0, jwt_1.generateJWT)(existingClient[0].id + '', jwtDurationInMinutes, xSecret);
+                resp.status(200).json({ jwt });
             }
             else {
-                resp
-                    .status(404)
-                    .json({ message: `client_not_found: ${xClient}` });
+                resp.status(404).json({ message: `client_not_found: ${xClient}` });
             }
         }
         else {

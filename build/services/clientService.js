@@ -21,12 +21,14 @@ class ClientService {
             console.log(clients);
             return clients;
         });
-        //   findById = async (id: number) => {
-        //     const existingClient: Client | null = await db.Client.findByPk(
-        //       id
-        //     );
-        //     return existingClient;
-        //   };
+        // findUser = async (id: ) => {
+        //   const clients: Client[] = await db.Client.findAll({ where: { name, key } });
+        //   return clients;
+        // };
+        this.findById = (id) => __awaiter(this, void 0, void 0, function* () {
+            const existingClient = yield models_1.db.Client.findByPk(id);
+            return existingClient;
+        });
         //   findOne = async (name: string, key: string) => {
         //     const existingClient: Client | null = await db.Client.findOne({
         //       where: { name, key },

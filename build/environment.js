@@ -37,4 +37,6 @@ exports.default = {
     DB_DIALECT: process.env.DB_DIALECT,
     DB_USERNAME: process.env.DB_USERNAME,
     DB_PASSWORD: process.env.DB_PASSWORD,
+    JWT_SECRET: process.env.JWT_SECRET,
+    JWT_DURATION_IN_MINUTES: process.env.JWT_DURATION_IN_MINUTES,
 };
