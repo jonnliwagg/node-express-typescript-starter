@@ -1,0 +1,26 @@
+{
+    "keepSettings": {
+        "type": 2,
+        "amount": 10
+    },
+    "auditFilename": "audit.json",
+    "hashType": "md5",
+    "extension": "",
+    "files": [
+        {
+            "date": 1687230025685,
+            "name": "/Users/guevarra/Documents/bootcamp/nodejs/nodejs-starter/logs/access.2023-06-19.log",
+            "hash": "2d3d12f17bc0c0955b73dbb4da78c94a"
+        },
+        {
+            "date": 1687244470181,
+            "name": "/Users/guevarra/Documents/bootcamp/nodejs/nodejs-starter/logs/access.2023-06-20.log",
+            "hash": "af79d309d2767ade596e2e60be14df65"
+        },
+        {
+            "date": 1687325346252,
+            "name": "C:\\Users\\liwjo\\Downloads\\Bootcamp 2 Files\\node-express-typescript-starter\\logs\\access.2023-06-21.log",
+            "hash": "881c9fb2f9d50fa1b6d726750bc26756"
+        }
+    ]
+}
