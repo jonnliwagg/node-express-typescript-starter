@@ -16,22 +16,23 @@ const models_1 = require("../database/models");
 const client_1 = __importDefault(require("../database/models/client"));
 class ClientService {
     constructor() {
-        //   findAll = async () => {
-        //     const clients: Client[] = await db.Client.findAll();
-        //     return clients;
-        //   };
+        this.verifyUser = (name, key) => __awaiter(this, void 0, void 0, function* () {
+            const clients = yield models_1.db.Client.findAll({ where: { name, key } });
+            console.log(clients);
+            return clients;
+        });
         //   findById = async (id: number) => {
         //     const existingClient: Client | null = await db.Client.findByPk(
         //       id
         //     );
         //     return existingClient;
         //   };
-        this.findOne = (name, key) => __awaiter(this, void 0, void 0, function* () {
-            const existingClient = yield models_1.db.Client.findOne({
-                where: { name, key },
-            });
-            return existingClient;
-        });
+        //   findOne = async (name: string, key: string) => {
+        //     const existingClient: Client | null = await db.Client.findOne({
+        //       where: { name, key },
+        //     });
+        //     return existingClient;
+        //   };
         this.save = (object) => __awaiter(this, void 0, void 0, function* () {
             // eslint-disable-next-line no-useless-catch
             try {

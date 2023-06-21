@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { db } from '../database/models';
 import Client from '../database/models/client';
 
@@ -11,10 +12,11 @@ class ClientService {
     return ClientService.instance;
   }
 
-  //   findAll = async () => {
-  //     const clients: Client[] = await db.Client.findAll();
-  //     return clients;
-  //   };
+  verifyUser = async (name: string, key: string) => {
+    const clients: Client[] = await db.Client.findAll({ where: { name, key } });
+    console.log(clients);
+    return clients;
+  };
 
   //   findById = async (id: number) => {
   //     const existingClient: Client | null = await db.Client.findByPk(
@@ -23,12 +25,12 @@ class ClientService {
   //     return existingClient;
   //   };
 
-  findOne = async (name: string, key: string) => {
-    const existingClient: Client | null = await db.Client.findOne({
-      where: { name, key },
-    });
-    return existingClient;
-  };
+  //   findOne = async (name: string, key: string) => {
+  //     const existingClient: Client | null = await db.Client.findOne({
+  //       where: { name, key },
+  //     });
+  //     return existingClient;
+  //   };
 
   save = async (object: any) => {
     // eslint-disable-next-line no-useless-catch

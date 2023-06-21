@@ -29,20 +29,27 @@ router.post('/', (req, resp, next) => __awaiter(void 0, void 0, void 0, function
         next(err);
     }
 }));
+router.get('/', (req, resp, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const xClient = req.headers['x-client'];
+        const xSecret = req.headers['x-secret'];
+        if (typeof xClient === 'string' && typeof xSecret === 'string') {
+            const existingClient = yield clientService_1.default.getInstance().verifyUser(xClient, xSecret);
+            if (existingClient.length > 0) {
+                resp.status(200).json(existingClient);
+            }
+            else {
+                resp
+                    .status(404)
+                    .json({ message: `client_not_found: ${xClient}` });
+            }
+        }
+        else {
+            resp.status(404).json({ message: 'Bad Request' });
+        }
+    }
+    catch (err) {
+        next(err);
+    }
+}));
 exports.default = router;
-// router.get('/:id', async (req: Request, resp: Response, next: NextFunction) => {
-//     try {
-//       const existingClient = await ClientService.getInstance().findById(
-//         parseInt(req.params.id)
-//       );
-//       if (existingClient) {
-//         resp.status(200).json(existingClient);
-//       } else {
-//         resp
-//           .status(404)
-//           .json({ message: `client_not_found: ${req.params.id}` });
-//       }
-//     } catch (err) {
-//       next(err);
-//     }
-//   });
