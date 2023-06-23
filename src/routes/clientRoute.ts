@@ -10,7 +10,7 @@ import environment from '../environment';
 
 const router = express.Router();
 
-router.post('/', async (req: Request, resp: Response, next: NextFunction) => {
+router.post('/register', async (req: Request, resp: Response, next: NextFunction) => {
   console.log(req.headers);
 
   try {
@@ -25,7 +25,7 @@ router.post('/', async (req: Request, resp: Response, next: NextFunction) => {
   }
 });
 
-router.get('/', async (req: Request, resp: Response, next: NextFunction) => {
+router.get('/access-token', async (req: Request, resp: Response, next: NextFunction) => {
   try {
     const xClient = req.headers['x-client'];
     const xSecret = req.headers['x-secret'];
@@ -36,9 +36,15 @@ router.get('/', async (req: Request, resp: Response, next: NextFunction) => {
       );
       if (existingClient.length > 0) {
         const jwtSecret: string = environment.JWT_SECRET as string;
-        const jwtDurationInMinutes: number = parseInt(environment.JWT_DURATION_IN_MINUTES as string);
+        const jwtDurationInMinutes: number = parseInt(
+          environment.JWT_DURATION_IN_MINUTES as string
+        );
         // const jwt = generateJWT(existingClient[0].id + '', jwtDurationInMinutes, jwtSecret);
-        const jwt = generateJWT(existingClient[0].id + '', jwtDurationInMinutes, xSecret);
+        const jwt = generateJWT(
+          existingClient[0].id + '',
+          jwtDurationInMinutes,
+          xSecret
+        );
         resp.status(200).json({ jwt });
       } else {
         resp.status(404).json({ message: `client_not_found: ${xClient}` });

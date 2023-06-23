@@ -17,7 +17,7 @@ const jwt_1 = require("../utils/jwt");
 const clientService_1 = __importDefault(require("../services/clientService"));
 const environment_1 = __importDefault(require("../environment"));
 const router = express_1.default.Router();
-router.post('/', (req, resp, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/register', (req, resp, next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers);
     try {
         const payload = {
@@ -31,7 +31,7 @@ router.post('/', (req, resp, next) => __awaiter(void 0, void 0, void 0, function
         next(err);
     }
 }));
-router.get('/', (req, resp, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/access-token', (req, resp, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const xClient = req.headers['x-client'];
         const xSecret = req.headers['x-secret'];

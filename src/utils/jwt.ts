@@ -40,13 +40,13 @@ export const verifyJWT = (jwt: string, secret: string): boolean => {
   const payload = extractPayload(jwt);
   const expireDateUnixTimestamp: number = payload['expireAt'] as number;
   console.log(expireDateUnixTimestamp);
-  
+
   const expireDate: Date = new Date(expireDateUnixTimestamp);
   const now: Date = new Date();
   console.log(`current: ${now}`);
   console.log(`expireTime: ${expireDate}`);
-  
-  if(now > expireDate) {
+
+  if (now > expireDate) {
     return false;
   }
   const legitSignature = replaceSpecialChars(

@@ -70,9 +70,11 @@ async function authorizationMiddleware(
       return;
     }
     const payload = extractPayload(jwt);
-    const userId:number = parseInt(payload['id']);
-    const client: Client| null = await ClientService.getInstance().findById(userId);
-    if(!client) {
+    const userId: number = parseInt(payload['id']);
+    const client: Client | null = await ClientService.getInstance().findById(
+      userId
+    );
+    if (!client) {
       resp.status(401).json({ message: 'invalid_jwt_token_client' });
       return;
     }
